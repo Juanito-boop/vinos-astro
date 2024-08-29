@@ -1,0 +1,25 @@
+---
+import AsideMainReact from './AsideMainReact';
+
+import { supabase } from '../../lib/supabase'; 
+
+async function fetchData() {
+  const { data: variedades, error: errorVariedades } = await supabase
+    .from('variedades')
+    .select('id, variedad');
+
+  const { data: paises, error: errorPaises } = await supabase
+    .from('paises')
+    .select('id, pais');
+
+  if (errorVariedades || errorPaises) {
+    throw new Error('Error fetching data');
+  }
+
+  return { variedades, paises };
+}
+
+const { variedades, paises } = await fetchData();
+---
+
+<AsideMainReact variedades={variedades} paises={paises} client:load  />
