@@ -1,7 +1,6 @@
 ---
-import AsideMainReact from './AsideMainReact';
-
 import { supabase } from '../../lib/supabase'; 
+import AsideMainReact from './AsideMainReact';
 
 async function fetchData() {
   const { data: variedades, error: errorVariedades } = await supabase
@@ -21,5 +20,4 @@ async function fetchData() {
 
 const { variedades, paises } = await fetchData();
 ---
-
 <AsideMainReact variedades={variedades} paises={paises} client:load  />

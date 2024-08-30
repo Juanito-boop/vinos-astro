@@ -1,6 +1,5 @@
-// src/components/MainHeader.jsx
 import { useState } from 'react';
-import ModalMenu from '../../pages/modales/menu/ModalMenu';
+import ModalMenu from '../modales/menu/ModalMenu';
 
 export default function MainHeaderReact() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -64,5 +63,5 @@ export default function MainHeaderReact() {
         )}
       </div>
     </header>
-  );
+  )
 }

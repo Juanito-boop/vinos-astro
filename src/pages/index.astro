@@ -2,10 +2,13 @@
 import LayoutPrincipal from '../layouts/main.astro'
 import MainHeader from '../components/mainHeader/MainHeader.astro'
 import AsideMain from '../components/asideMain/AsideMain.astro'
+import MainBody from '../components/mainBody/MainBody.astro'
 ---
+
 <LayoutPrincipal title='Astro + TailwindCSS + React'>
 	<MainHeader />
-	<section class="flex flex-row mx-2.5 gap-2">
-		<AsideMain />
-	</section>
+    <section class="flex flex-row mx-2.5 gap-2">
+        <AsideMain />
+        <MainBody />
+    </section>
 </LayoutPrincipal>

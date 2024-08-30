@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ModalCarrito from '../../pages/modales/carrito/ModalCarrito';
+import ModalCarrito from '../modales/carrito/ModalCarrito';
 
 interface Variedades {
   id: number;
