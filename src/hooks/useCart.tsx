@@ -1,12 +1,5 @@
 import { useState, useCallback } from 'react';
-
-interface CartItem {
-  productId: number;
-  nombre: string;
-  quantity: number;
-  price: number;
-  timestamp?: number; // Agregar timestamp opcional
-}
+import type { CartItem } from './interface';
 
 export default function useCart() {
   const [cart, setCart] = useState<CartItem[]>([]);

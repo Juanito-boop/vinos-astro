@@ -1,10 +1,6 @@
 import { useEffect } from "react";
 import useCart from "../../../hooks/useCart"; // Importa tu hook personalizado
-
-interface ModalCarritoProps {
-  isModalOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
-}
+import type { ModalCarritoProps } from "../interface";
 
 export default function ModalCarrito({
   isModalOpen,

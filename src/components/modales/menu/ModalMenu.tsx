@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import EmailPasswordForm from "./forms/emailPassword";
 import SignUpForm from "./forms/signUp";
+import type { ModalMenu } from "../interface";
 type FormType = "email" | "sign up";
 
-interface ModalMenu {
-  isModalOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
-}
+
 export default function ModalMenu({ isModalOpen, setIsModalOpen }: Readonly<ModalMenu>) {
   const [form, setForm] = useState<FormType>("email");
 
