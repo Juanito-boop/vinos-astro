@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ModalCarrito from '../modales/carrito/ModalCarrito';
-import type { AsideMainClientProps, RenderListProps } from './interface';
+import type { AsideMainClientProps } from './interface';
 import { useGlobalSelection, GlobalSelectionProvider } from '@/hooks/useGlobalSelection';
 
 // Props interface
