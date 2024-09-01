@@ -1,5 +1,5 @@
 ---
-import { supabase } from '../../lib/supabase'; 
+import { supabase } from '@/lib/supabase'; 
 import AsideMainReact from './AsideMainReact';
 
 async function fetchData() {
@@ -12,7 +12,7 @@ async function fetchData() {
     .select('id, pais');
 
   if (errorVariedades || errorPaises) {
-    throw new Error('Error fetching data');
+    throw new Error('Error fetching Variedades || Paises data');
   }
 
   return { variedades, paises };

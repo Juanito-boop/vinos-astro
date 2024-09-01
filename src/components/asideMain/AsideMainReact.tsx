@@ -1,7 +1,7 @@
+import ModalCarrito from '@/components/modales/carrito/ModernModalWithCartIcon';
+import { GlobalSelectionProvider, useGlobalSelection } from '@/hooks/useGlobalSelection';
 import { useState } from 'react';
-import ModalCarrito from '../modales/carrito/ModalCarrito';
 import type { AsideMainClientProps } from './interface';
-import { useGlobalSelection, GlobalSelectionProvider } from '@/hooks/useGlobalSelection';
 
 // Props interface
 const RenderList = ({ items, title, storageKey }: { items: { id: number; name: string, arreglo: string }[], title: string, storageKey: string }) => {
@@ -34,30 +34,14 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
 };
 
 export default function AsideMainReact({ variedades, paises }: Readonly<AsideMainClientProps>) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { clearAllSelections } = useGlobalSelection();
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
 
   return (
     <GlobalSelectionProvider>
-      <aside className="flex flex-col max-w-[20%] min-w-[15%] rounded-l-xl bg-normalColor11">
-        <button
-          className="w-16 h-16 p-3 mx-auto my-4 border border-principalColor1 rounded-lg"
-          onClick={handleOpenModal}
-        >
-          <picture>
-            <img src="/carrito.svg" alt="Carrito" />
-          </picture>
-        </button>
-        {isModalOpen && (
-          <ModalCarrito
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-          />
-        )}
+      <aside className="flex flex-col rounded-l-xl bg-normalColor11">
+        <div className='mx-auto mt-3'>
+          <ModalCarrito />
+        </div>
         <span className="flex items-center justify-center text-[1.5em] font-bold text-principalColor1 bg-normalColor11 rounded-t-xl px-5 py-2">
           {'FILTROS'}
         </span>

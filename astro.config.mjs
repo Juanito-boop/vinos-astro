@@ -7,6 +7,6 @@ import react from "@astrojs/react";
 export default defineConfig({
   // site: 'https://Juanito-boop.github.io',
   // base: 'vinos',
-  output:'hybrid',
-  integrations: [tailwind(), react()]
+  output: "hybrid",
+  integrations: [tailwind({ applyBaseStyles: false }), react()],
 });

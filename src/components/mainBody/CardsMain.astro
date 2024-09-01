@@ -1,0 +1,51 @@
+---
+// CardsMain.astro
+import CarouselSection from './CarouselSectionReact';
+import { supabase } from '@/lib/supabase';
+import CarouselDemo  from '@/components/three-card-carousel'
+import CarouselReact from './CarouselV0';
+
+export async function fetchData(params: string[] = []) {
+  let query = supabase
+    .from("vinos")
+    .select(
+      `id, nombre, precio, variedad, id_unica, url_imagen, variedades(variedad), paises(pais)`
+    );
+
+  if (params.length > 0) {
+    query = query.in('variedades.variedad', params);
+  }
+
+  const { data: vinos, error: errorVinos } = await query;
+  const { data: variedades, error: errorVariedades } = await supabase
+    .from("variedades")
+    .select(`id, variedad`);
+
+  if (errorVinos || errorVariedades) {
+    throw errorVinos || errorVariedades;
+  }
+
+  return {
+    vinos: vinos as unknown as any[],
+    variedades: variedades as any[],
+  };
+}
+
+export function groupVinosByVariedad(vinos: any[]) {
+  return vinos.reduce((acc: { [key: string]: any[] }, vino: any) => {
+    const variedadId = vino.variedad.toString();
+    if (!acc[variedadId]) {
+      acc[variedadId] = [];
+    }
+    acc[variedadId].push(vino);
+    return acc;
+  }, {});
+}
+
+const { params = [] } = Astro.props;
+const { vinos, variedades } = await fetchData(params);
+const vinosPorVariedad = groupVinosByVariedad(vinos);
+
+---
+
+

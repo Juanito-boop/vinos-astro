@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useCart from "../../../hooks/useCart"; // Importa tu hook personalizado
+import useCart from "@/hooks/useCart"; // Importa tu hook personalizado
 import type { ModalCarritoProps } from "../interface";
 
 export default function ModalCarrito({

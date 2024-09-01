@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ModalMenu from '../modales/menu/ModalMenu';
+import ModalMenu from '@/components/modales/menu/ModalMenu';
 
 export default function MainHeaderReact() {
   const [isModalOpen, setIsModalOpen] = useState(false);
