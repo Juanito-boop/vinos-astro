@@ -1,13 +1,6 @@
-import { useState } from 'react';
 import ModalMenu from '@/components/modales/menu/ModalMenu';
 
 export default function MainHeaderReact() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
   return (
     <header className="z-0 mx-2.5 mb-3 w-auto rounded-b-xl bg-magenta-500 py-3">
       <div className="mx-auto mb-[10px] flex items-center justify-evenly">
@@ -41,26 +34,7 @@ export default function MainHeaderReact() {
           </div>
         </div>
 
-        <button
-          className="relative mx-[50px] my-10 p-3"
-          id="boton-menu"
-          onClick={handleOpenModal}
-        >
-          <picture>
-            <img
-              src="https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/some/bars-solid.svg"
-              id="icono-menu"
-              alt=""
-              className="w-7 align-top cursor-pointer"
-            />
-          </picture>
-        </button>
-        {isModalOpen && (
-          <ModalMenu
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-          />
-        )}
+        <ModalMenu />
       </div>
     </header>
   )

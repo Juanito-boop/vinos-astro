@@ -24,12 +24,12 @@ export default function ModalCarrito() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className='bg-normalColor9'>
+        <Button variant="outline" className='bg-normalColor11 text-white border-none hover:invert-0'>
           <ShoppingCart className="mr-2 h-4 w-4" />
           Carrito
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="max-w-[70%]">
         <DialogHeader>
           <DialogTitle className="flex items-center">
             <ShoppingCart className="mr-2 h-5 w-5" />

@@ -4,21 +4,13 @@ import '@/globals.css'
 import LayoutPrincipal from '../layouts/main.astro'
 import MainHeader from '@/components/mainHeader/MainHeader.astro'
 import AsideMain from '@/components/asideMain/AsideMain.astro'
-import CardsMain from '@/components/mainBody/CardsMain.astro'
-import CarouselSize from '@/components/three-card-carousel'
-import WineCard from '@/components/wine-card'
+import BodyCards from '@/components/mainBody/CardsMain.astro'
 ---
 
 <LayoutPrincipal title='Astro + TailwindCSS + React + shadcn'>
 	<MainHeader />
-	<section class="grid grid-flow-col grid-cols-[15%,80%] mx-2.5 gap-x-2">
-    <div class="col-span-1 w-full">
-			<AsideMain />
-    </div>
-    <main class="px-1 pt-3 pb-1 bg-normalColor11 rounded-r-xl col-span-2">
-			<!-- <CarouselSize client:load /> -->
-			 <WineCard	/>
-    </main>
-</section>
-
+	<section class="grid grid-flow-col grid-cols-[1fr,80%] mx-2.5 gap-x-2">
+		<AsideMain />
+		<BodyCards />
+	</section>
 </LayoutPrincipal>

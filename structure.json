@@ -1,11 +1,136 @@
 {
-  "src": {
-    "pages": {
-      "modales": {
-        "carrito": {
-          "ModalCarrito.tsx": "import { useEffect } from \"react\";\r\n\r\ninterface CartItem {\r\n  productId: number;\r\n  nombre: string;\r\n  quantity: number;\r\n  price: number;\r\n  timestamp?: number;\r\n}\r\n\r\ninterface ModalCarrito {\r\n  isModalOpen: boolean;\r\n  setIsModalOpen: (isOpen: boolean) => void;\r\n  cartItems: CartItem[];\r\n}\r\n\r\nexport default function ModalCarrito({\r\n  isModalOpen,\r\n  setIsModalOpen,\r\n  cartItems,\r\n}: ModalCarrito) {\r\n  useEffect(() => {\r\n    const handleEscape = (event: KeyboardEvent) => {\r\n      if (event.key === \"Escape\") {\r\n        setIsModalOpen(false);\r\n      }\r\n    };\r\n\r\n    if (isModalOpen) {\r\n      document.body.style.overflow = \"hidden\";\r\n      document.addEventListener(\"keydown\", handleEscape);\r\n    } else {\r\n      document.body.style.overflow = \"unset\";\r\n    }\r\n\r\n    return () => {\r\n      document.body.style.overflow = \"unset\";\r\n      document.removeEventListener(\"keydown\", handleEscape);\r\n    };\r\n  }, [isModalOpen, setIsModalOpen]);\r\n\r\n  if (!isModalOpen) return null;\r\n\r\n  function renderHeader() {\r\n    return (\r\n      <>\r\n        <div className=\"flex justify-between p-2\">\r\n          <button className=\"mr-auto inline-flex items-center rounded-lg bg-transparent p-1.5\">\r\n            <picture>\r\n              <img src=\"/carrito.svg\" alt=\"Carrito\" className=\"h-5 w-5\" />\r\n            </picture>\r\n          </button>\r\n          <button\r\n            onClick={() => setIsModalOpen(false)}\r\n            type=\"button\"\r\n            className=\"ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900\"\r\n          >\r\n            <svg\r\n              className=\"h-5 w-5\"\r\n              fill=\"currentColor\"\r\n              viewBox=\"0 0 20 20\"\r\n              xmlns=\"http://www.w3.org/2000/svg\"\r\n            >\r\n              <path\r\n                fillRule=\"evenodd\"\r\n                d=\"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z\"\r\n                clipRule=\"evenodd\"\r\n              ></path>\r\n            </svg>\r\n          </button>\r\n        </div>\r\n      </>\r\n    );\r\n  }\r\n\r\n  function displayCartItems(): JSX.Element {\r\n    return (\r\n      <>\r\n        <div className=\"pb-3 pt-0 grid grid-rows-[10%_8%_92%] h-full\">\r\n          <h3 className=\"text-xl font-normal text-gray-500 text-center row-start-1 my-auto\">\r\n            Este es tu carrito de compras\r\n          </h3>\r\n          <div className=\"row-start-2 grid grid-cols-[10%_1fr_15%_15%] gap-x-1 rounded px-3\">\r\n            <span className=\"text-lg text-start col-start-1\">{\"ID\"}</span>\r\n            <span className=\"text-lg text-start col-start-2\">{\"Producto\"}</span>\r\n            <span className=\"text-lg text-center col-start-3\">{\"Cantidad\"}</span>\r\n            <span className=\"text-lg text-center col-start-4\">Precio</span>\r\n          </div>\r\n          <div className=\"row-start-3 flex flex-col gap-1 mt-2 overflow-y-scroll\">\r\n            {cartItems.length > 0 ? (\r\n              cartItems.map((item, index) => (\r\n                <div\r\n                  key={item.productId}\r\n                  className={`grid grid-cols-[10%_1fr_15%_15%] gap-x-1 rounded px-3 py-1.5 ${index % 2 === 0 ? \"bg-blue-100\" : \"bg-green-100\"\r\n                    }`}\r\n                >\r\n                  <span className=\"text-lg col-start-1 text-start\">{item.productId}</span>\r\n                  <span className=\"text-lg col-start-2 text-start\">{item.nombre}</span>\r\n                  <span className=\"text-lg col-start-3 text-center\">{item.quantity}</span>\r\n                  <span className=\"text-lg col-start-4 text-center\">{\"$\" + item.price}</span>\r\n                </div>\r\n              ))\r\n            ) : (\r\n              <div className=\"text-lg my-3 bg-blue-100 p-3 text-center\">\r\n                No hay elementos en el carrito.\r\n              </div>\r\n            )}\r\n          </div>\r\n        </div>\r\n      </>\r\n    );\r\n  }\r\n\r\n  return (\r\n    <>\r\n      <div\r\n        className={\r\n          \"fixed z-50 inset-0 bg-gray-900/60 \" +\r\n          \"grid grid-cols-[1fr_70%_1fr] grid-rows-[1fr_80%_1fr]\"\r\n        }>\r\n        <div\r\n          className={\r\n            \"col-start-2 row-start-2 mx-auto w-full shadow-xl rounded-lg bg-white max-w-4xl \" +\r\n            \"grid grid-rows-[85%_1fr]\"\r\n          }>\r\n          <div className=\"p-3 pb-0 row-start-1 max-h-[85%]\">\r\n            {renderHeader()}\r\n            {displayCartItems()}\r\n          </div>\r\n          <div className=\"row-start-2 flex flex-row justify-end bg-white\">\r\n            <button\r\n              className=\"my-auto py-2 px-4 mx-5 text-lg border rounded bg-green-500 text-white uppercase\"\r\n              onClick={() => setIsModalOpen(false)}\r\n            >\r\n              Pagar\r\n            </button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </>\r\n  );\r\n}"
-        }
-      }
+  "Merlot": [
+    {
+      "id": 1,
+      "nombre": "Petirrojo",
+      "precio": 87.422,
+      "variedad": 5,
+      "id_unica": 245726,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/245726.png"
     }
-  }
+  ],
+  "Malbec": [
+    {
+      "id": 2,
+      "nombre": "Posta Pizzella",
+      "precio": 98.842,
+      "variedad": 4,
+      "id_unica": 933404,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/933404.png"
+    },
+    {
+      "id": 11,
+      "nombre": "Angelica Zapata",
+      "precio": 569.962,
+      "variedad": 4,
+      "id_unica": 850550,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/850550.png"
+    },
+    {
+      "id": 13,
+      "nombre": "Zuccardi Serie A",
+      "precio": 102.762,
+      "variedad": 4,
+      "id_unica": 438553,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/438553.png"
+    },
+    {
+      "id": 14,
+      "nombre": "Cerro Verde",
+      "precio": 91.362,
+      "variedad": 4,
+      "id_unica": 178631,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/178631.png"
+    }
+  ],
+  "Cabernet Sauvignon": [
+    {
+      "id": 3,
+      "nombre": "Marquez de villa de leyva",
+      "precio": 477.162,
+      "variedad": 2,
+      "id_unica": 948930,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/948930.png"
+    },
+    {
+      "id": 4,
+      "nombre": "Don Melchor",
+      "precio": 174.622,
+      "variedad": 2,
+      "id_unica": 543152,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/543152.png"
+    },
+    {
+      "id": 7,
+      "nombre": "Reserva de la Tierra",
+      "precio": 75.962,
+      "variedad": 2,
+      "id_unica": 323324,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/323324.png"
+    },
+    {
+      "id": 10,
+      "nombre": "Montes Alpha M",
+      "precio": 208.962,
+      "variedad": 2,
+      "id_unica": 782699,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/782699.png"
+    }
+  ],
+  "Carménère": [
+    {
+      "id": 5,
+      "nombre": "Purple Angel",
+      "precio": 113.962,
+      "variedad": 3,
+      "id_unica": 330628,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/330628.png"
+    }
+  ],
+  "Pinot Grigio": [
+    {
+      "id": 6,
+      "nombre": "Muga",
+      "precio": 75.962,
+      "variedad": 6,
+      "id_unica": 692159,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/692159.png"
+    },
+    {
+      "id": 8,
+      "nombre": "Maison Castel Gran Reserva",
+      "precio": 83.582,
+      "variedad": 6,
+      "id_unica": 191880,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/191880.png"
+    },
+    {
+      "id": 9,
+      "nombre": "Santa Margherita",
+      "precio": 189.962,
+      "variedad": 6,
+      "id_unica": 257609,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/257609.png"
+    }
+  ],
+  "Cabernet Franc": [
+    {
+      "id": 12,
+      "nombre": "Gran Enemigo",
+      "precio": 68.362,
+      "variedad": 1,
+      "id_unica": 652132,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/652132.png"
+    }
+  ],
+  "Tempranillo": [
+    {
+      "id": 15,
+      "nombre": "Codice",
+      "precio": 45.562,
+      "variedad": 7,
+      "id_unica": 265178,
+      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/265178.png"
+    }
+  ]
 }

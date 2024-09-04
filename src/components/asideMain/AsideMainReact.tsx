@@ -9,7 +9,7 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
   const selectedItems = getSelectedItems(storageKey);
 
   return (
-    <section className="pb-2 border-t bg-normalColor11 border-principalColor1 rounded-b-xl">
+    <section className="pb-2 border-t bg-normalColor11 border-principalColor1 rounded-b-xl col-span-1 w-full">
       <span className="flex items-center justify-center my-2 text-xl font-bold text-principalColor1">
         {title}
       </span>

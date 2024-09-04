@@ -1,51 +1,59 @@
 ---
 // CardsMain.astro
-import CarouselSection from './CarouselSectionReact';
 import { supabase } from '@/lib/supabase';
-import CarouselDemo  from '@/components/three-card-carousel'
 import CarouselReact from './CarouselV0';
+import type { Variedades, VinosOrganizados, Wines } from './interface';
 
-export async function fetchData(params: string[] = []) {
-  let query = supabase
+export async function fetchData() {
+  const { data: vinos, error: errorVinos } = await supabase
     .from("vinos")
-    .select(
-      `id, nombre, precio, variedad, id_unica, url_imagen, variedades(variedad), paises(pais)`
-    );
+    .select(`
+      id, 
+      nombre, 
+      precio, 
+      variedad, 
+      id_unica, 
+      url_imagen, 
+      variedades(id, variedad, tipo), 
+      paises(id, pais)
+    `);
 
-  if (params.length > 0) {
-    query = query.in('variedades.variedad', params);
-  }
-
-  const { data: vinos, error: errorVinos } = await query;
   const { data: variedades, error: errorVariedades } = await supabase
     .from("variedades")
-    .select(`id, variedad`);
+    .select(`id, variedad, tipo`);
 
   if (errorVinos || errorVariedades) {
     throw errorVinos || errorVariedades;
   }
 
+  const organizarVinosPorVariedad = (vinos: any[], variedades: Variedades[]): VinosOrganizados => {
+    return vinos.reduce((acc: VinosOrganizados, vino: Wines) => {
+      // Obtener el nombre de la variedad desde el objeto de variedades del vino
+      const nombreVariedad = vino.variedades.variedad;
+  
+      // Si la variedad aún no existe en el acumulador, inicializamos un array vacío
+      if (!acc[nombreVariedad]) {
+        acc[nombreVariedad] = [];
+      }
+  
+      // Agregamos el vino al array correspondiente a la variedad
+      acc[nombreVariedad].push(vino);
+  
+      return acc;
+    }, {} as VinosOrganizados);
+  };
+
+  const vinosOrganizados = organizarVinosPorVariedad(vinos, variedades);
+
   return {
-    vinos: vinos as unknown as any[],
-    variedades: variedades as any[],
+    vinosOrganizados
   };
 }
 
-export function groupVinosByVariedad(vinos: any[]) {
-  return vinos.reduce((acc: { [key: string]: any[] }, vino: any) => {
-    const variedadId = vino.variedad.toString();
-    if (!acc[variedadId]) {
-      acc[variedadId] = [];
-    }
-    acc[variedadId].push(vino);
-    return acc;
-  }, {});
-}
-
-const { params = [] } = Astro.props;
-const { vinos, variedades } = await fetchData(params);
-const vinosPorVariedad = groupVinosByVariedad(vinos);
-
+const { vinosOrganizados } = await fetchData();
 ---
-
-
+<main class="px-1 pt-3 pb-1 bg-normalColor11 rounded-r-xl col-span-2">
+  {Object.keys(vinosOrganizados).map((variedad) => (
+    <CarouselReact titulo={variedad.toString()} vinos={vinosOrganizados[variedad]} />
+  ))}
+</main>
