@@ -39,10 +39,7 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = (props) => {
             <a href={`informacion/${vino.nombre}~${vino.variedades.variedad}`.replace(/\s+/g, '-')} key={vino.id_unica} className="flex-1 gap-x-2 basis-1/3 flex-shrink-0 max-w-[33.33%]">
               <Card className="flex flex-col mx-3 overflow-hidden transition-shadow duration-300 hover:shadow-lg">
                 <div className="relative aspect-square">
-                  <img src={vino.url_imagen} alt={vino.nombre} className="object-cover w-full h-full" />
-                  {/* <div className=" w-auto px-4 py-1 mr-auto text-white bg-black rounded-lg ">
-                    
-                  </div> */}
+                  <img src={vino.url_imagen} alt={vino.nombre} className="object-cover w-full h-full bg-gray-400" />
                   <Badge className='absolute top-2 right-2 text-base px-5' variant="default">{vino.variedades.tipo}</Badge>
                 </div>
                 <CardContent className="flex flex-col flex-grow p-4">
