@@ -5,8 +5,8 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  // site: 'https://Juanito-boop.github.io',
-  // base: 'vinos',
+  site: 'https://Juanito-boop.github.io',
+  base: '/',
   output: "hybrid",
   integrations: [tailwind({ applyBaseStyles: false }), react()],
 });
