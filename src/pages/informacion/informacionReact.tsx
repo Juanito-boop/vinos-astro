@@ -7,22 +7,22 @@ import { useCallback, useEffect, useState } from "react";
 
 const banderas: { [key: string]: () => JSX.Element | null } = {
   Argentina: () => <picture>
-    <img src="/Argentina.svg" alt="Bandera Argentina" />
+    <img src="/vinos-astro/Argentina.svg" alt="Bandera Argentina" />
   </picture>,
   Chile: () => <picture>
-    <img src="/Chile.svg" alt="Bandera Chile" />
+    <img src="/vinos-astro/Chile.svg" alt="Bandera Chile" />
   </picture>,
   Colombia: () => <picture>
-    <img src="/Colombia.svg" alt="Bandera Colombia" />
+    <img src="/vinos-astro/Colombia.svg" alt="Bandera Colombia" />
   </picture>,
   España: () => <picture>
-    <img src="/España.svg" alt="Bandera España" />
+    <img src="/vinos-astro/España.svg" alt="Bandera España" />
   </picture>,
   Francia: () => <picture>
-    <img src="/Francia.svg" alt="Bandera Francia" />
+    <img src="/vinos-astro/Francia.svg" alt="Bandera Francia" />
   </picture>,
   Italia: () => <picture>
-    <img src="/Italia.svg" alt="Bandera Italia" />
+    <img src="/vinos-astro/Italia.svg" alt="Bandera Italia" />
   </picture>,
 };
 
