@@ -84,7 +84,9 @@ export default function InformacionReact({ nombre, variedad }: Readonly<{ nombre
   }, []);
 
   if (loading) {
-    return <div className="mx-2.5 bg-normalColor11 rounded-xl p-3 text-center">Cargando...</div>;
+    return <main className="flex-grow mx-2.5 bg-normalColor11 rounded-xl px-1 py-2 text-center text-2xl align-middle">
+      Cargando...
+    </main>;
   }
 
   if (error) {
@@ -96,8 +98,8 @@ export default function InformacionReact({ nombre, variedad }: Readonly<{ nombre
   }
 
   return (
-    <main className="mx-2.5 bg-normalColor11 rounded-xl px-1 py-2">
-      <div className="container mx-auto py-3 px-0">
+    <main className="flex-grow mx-2.5 bg-normalColor11 rounded-xl px-1 py-2">
+      <div className="container m-auto py-3 px-0">
         <div className="md:flex overflow-hidden">
           <div className="md:flex-shrink-0 bg-gray-200 rounded-l-xl py-5">
             <picture>

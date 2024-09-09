@@ -11,7 +11,7 @@ export default function MainHeaderReact() {
   return (
     <header className="z-0 mx-2.5 mb-3 w-auto rounded-b-xl bg-magenta-500 py-3">
       <div className="grid grid-flow-col grid-cols-[20%,1fr,20%] items-center">
-        <a href="/vinos-astro" className="inline-block p-3 rounded-md col-span-1 mx-auto" aria-label="Home">
+        <a href="/vinos-astro/" className="inline-block p-3 rounded-md col-span-1 mx-auto" aria-label="Home">
           <img
             src="https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/some/image-removebg-preview.svg"
             alt="Logo"
