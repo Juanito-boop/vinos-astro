@@ -10,6 +10,7 @@ import {
   PrevButton,
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons';
+import ModalInfo from '@/components/modales/infoProducto/ModalInfo';
 
 const EmblaCarousel: React.FC<EmblaCarouselProps> = (props) => {
   const { titulo, options, vinos } = props
@@ -31,13 +32,13 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = (props) => {
   }
 
   return (
-    <section className=''>
+    <section>
       <h2 className='w-full my-3 text-3xl text-center'>{titulo}</h2>
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {vinos.map((vino, _index) => (
-            <a href={`informacion/${vino.nombre}~${vino.variedades.variedad}`.replace(/\s+/g, '-')} key={vino.id_unica} className="flex-1 gap-x-2 basis-1/3 flex-shrink-0 max-w-[33.33%]">
-              <Card className="flex flex-col mx-3 overflow-hidden transition-shadow duration-300 hover:shadow-lg">
+            <ModalInfo key={vino.id_unica} elemento={`${vino.nombre}~${vino.variedades.variedad}`.replace(/\s+/g, '-')}>
+              <Card className="flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-lg basis-1/3 mx-1.5">
                 <div className="relative aspect-square">
                   <img src={vino.url_imagen} alt={vino.nombre} className="object-cover w-full h-full bg-gray-400" />
                   <Badge className='absolute top-2 right-2 text-base px-5' variant="default">{vino.variedades.tipo}</Badge>
@@ -62,7 +63,7 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = (props) => {
                   </div>
                 </CardContent>
               </Card>
-            </a>
+            </ModalInfo>
           ))}
         </div>
       </div>
