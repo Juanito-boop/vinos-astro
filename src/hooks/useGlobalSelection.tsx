@@ -1,39 +1,41 @@
-import { useState, useContext, createContext, useEffect } from 'react';
+import { useState, useContext, createContext, useEffect, useMemo } from 'react';
 
-// Crear un contexto para el estado global
 const GlobalSelectionContext = createContext<{
   getSelectedItems: (key: string) => string[];
   toggleItem: (key: string, item: string) => void;
   clearAllSelections: () => void;
+  clearSelectionForKey: (key: string) => void;
 }>({
   getSelectedItems: () => [],
-  toggleItem: () => { },
-  clearAllSelections: () => { },
+  toggleItem: () => {},
+  clearAllSelections: () => {},
+  clearSelectionForKey: () => {}
 });
 
-// Hook personalizado para usar el contexto
 export const useGlobalSelection = () => {
   return useContext(GlobalSelectionContext);
 };
 
-// Proveedor del contexto
-export const GlobalSelectionProvider = ({ children }: { children: React.ReactNode }) => {
+export const GlobalSelectionProvider = ({
+  children
+}: {
+  children: React.ReactNode
+}) => {
   const [selections, setSelections] = useState<{ [key: string]: string[] }>({});
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      const updatedSelections: { [key: string]: string[] } = {};
-      for (const key in localStorage) {
-        if (localStorage.hasOwnProperty(key) && key.startsWith('selectedItems_')) {
-          updatedSelections[key] = JSON.parse(localStorage.getItem(key) || '[]');
-        }
+  const handleStorageChange = () => {
+    const updatedSelections: { [key: string]: string[] } = {};
+    for (const key in localStorage) {
+      if (localStorage.hasOwnProperty(key) && key.startsWith('selectedItems_')) {
+        updatedSelections[key] = JSON.parse(localStorage.getItem(key) ?? '[]');
       }
-      setSelections(updatedSelections);
-    };
+    }
+    setSelections(updatedSelections);
+  };
 
+  useEffect(() => {
     window.addEventListener('storage', handleStorageChange);
 
-    // Llamar handleStorageChange para sincronizar el estado inicial
     handleStorageChange();
 
     return () => {
@@ -42,17 +44,18 @@ export const GlobalSelectionProvider = ({ children }: { children: React.ReactNod
   }, []);
 
   const getSelectedItems = (key: string) => {
-    return selections[key] || [];
+    const selectedItems = selections[key] || [];
+    return selectedItems;
   };
+
 
   const toggleItem = (key: string, item: string) => {
     const selectedItems = getSelectedItems(key);
     const newSelectedItems = selectedItems.includes(item)
-      ? selectedItems.filter(i => i !== item)
+      ? selectedItems.filter((i: string) => i !== item)
       : [...selectedItems, item];
 
-    // Ordenar alfabéticamente los elementos seleccionados
-    const sortedSelectedItems = newSelectedItems.sort((a, b) =>
+    const sortedSelectedItems = newSelectedItems.toSorted((a: string, b: string) =>
       a.localeCompare(b, 'es', { sensitivity: 'base' })
     );
 
@@ -68,21 +71,35 @@ export const GlobalSelectionProvider = ({ children }: { children: React.ReactNod
 
   const clearAllSelections = () => {
     if (typeof window !== 'undefined') {
-      // Recorre todas las claves en localStorage y elimina las que comienzan con 'selectedItems_'
       for (const key in localStorage) {
         if (localStorage.hasOwnProperty(key) && key.startsWith('selectedItems_')) {
-          localStorage.clear();
+          localStorage.setItem(key, JSON.stringify([]));
         }
       }
-      // Limpia también el estado interno
       setSelections({});
     }
   };
 
+  const clearSelectionForKey = (key: string) => {
+    setSelections(prevSelections => ({
+      ...prevSelections,
+      [key]: []
+    }));
 
-  return (
-    <GlobalSelectionContext.Provider value={{ getSelectedItems, toggleItem, clearAllSelections }}>
-      {children}
-    </GlobalSelectionContext.Provider>
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(key, JSON.stringify([]));
+    }
+  };
+
+
+  return useMemo(
+    () => (
+      <GlobalSelectionContext.Provider
+        value={{ getSelectedItems, toggleItem, clearAllSelections, clearSelectionForKey }}
+      >
+        {children}
+      </GlobalSelectionContext.Provider>
+    ),
+    [selections]
   );
 };

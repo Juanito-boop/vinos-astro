@@ -1,10 +1,12 @@
+import type { EmblaOptionsType } from "embla-carousel";
+
 export interface Wines {
   id:         number;
   nombre:     string;
   precio:     number;
-  variedad:   number;
   id_unica:   number;
   url_imagen: string;
+  bodega:     string;
   variedades: Variedades;
   paises:     Paises;
 }
@@ -28,3 +30,9 @@ export interface CarouselReactProps {
   titulo: string;
   vinos: Wines[];
 }
+
+export interface EmblaCarouselProps {
+  titulo: string;
+  options?: EmblaOptionsType;
+  vinos: Wines[];
+};

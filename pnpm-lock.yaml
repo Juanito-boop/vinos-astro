@@ -20,6 +20,9 @@ importers:
       '@astrojs/tailwind':
         specifier: ^5.1.0
         version: 5.1.0(astro@4.14.6(@types/node@22.5.1)(rollup@4.21.1)(typescript@5.5.4))(tailwindcss@3.4.10)
+      '@lucide/lab':
+        specifier: ^0.1.2
+        version: 0.1.2
       '@radix-ui/react-dialog':
         specifier: ^1.1.1
         version: 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -38,6 +41,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.0
+      '@uidotdev/usehooks':
+        specifier: ^2.4.1
+        version: 2.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       astro:
         specifier: ^4.14.6
         version: 4.14.6(@types/node@22.5.1)(rollup@4.21.1)(typescript@5.5.4)
@@ -53,9 +59,12 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      embla-carousel:
+        specifier: ^8.2.1
+        version: 8.2.1
       embla-carousel-autoplay:
         specifier: ^8.2.0
-        version: 8.2.0(embla-carousel@8.2.0)
+        version: 8.2.0(embla-carousel@8.2.1)
       embla-carousel-react:
         specifier: ^8.2.0
         version: 8.2.0(react@18.3.1)
@@ -86,6 +95,9 @@ importers:
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
+      vinos-astro:
+        specifier: 'file:'
+        version: file:(@types/node@22.5.1)(rollup@4.21.1)(vite@5.4.2(@types/node@22.5.1))
 
 packages:
 
@@ -548,6 +560,9 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@lucide/lab@0.1.2':
+    resolution: {integrity: sha512-VprF2BJa7ZuTGOhUd5cf8tHJXyL63wdxcGieAiVVoR9hO0YmPsnZO0AGqDiX2/br+/MC6n8BoJcmPilltOXIJA==}
+
   '@mdx-js/mdx@3.0.1':
     resolution: {integrity: sha512-eIQ4QTrOWyL3LWEe/bu6Taqzq2HQvHcyTMaOrI95P2/LmJE7AsfPfgJGuFLPVqBUE1BC1rik3VIhU+s9u72arA==}
 
@@ -915,6 +930,13 @@ packages:
   '@types/ws@8.5.12':
     resolution: {integrity: sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==}
 
+  '@uidotdev/usehooks@2.4.1':
+    resolution: {integrity: sha512-1I+RwWyS+kdv3Mv0Vmc+p0dPYH0DTRAo04HLyXReYBL9AeseDWUJyi4THuksBJcu9F0Pih69Ak150VDnqbVnXg==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
@@ -1255,6 +1277,9 @@ packages:
 
   embla-carousel@8.2.0:
     resolution: {integrity: sha512-rf2GIX8rab9E6ZZN0Uhz05746qu2KrDje9IfFyHzjwxLwhvGjUt6y9+uaY1Sf+B0OPSa3sgas7BE2hWZCtopTA==}
+
+  embla-carousel@8.2.1:
+    resolution: {integrity: sha512-9mTDtyMZJhFuuW5pixhTT4iLiJB1l3dH3IpXUKCsgLlRlHCiySf/wLKy5xIAzmxIsokcQ50xea8wi7BCt0+Rxg==}
 
   emmet@2.4.7:
     resolution: {integrity: sha512-O5O5QNqtdlnQM2bmKHtJgyChcrFMgQuulI+WdiOw2NArzprUqqxUW6bgYtKvzKgrsYpuLWalOkdhNP+1jluhCA==}
@@ -2473,6 +2498,9 @@ packages:
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
 
+  'vinos-astro@file:':
+    resolution: {directory: '', type: directory}
+
   vite@5.4.2:
     resolution: {integrity: sha512-dDrQTRHp5C1fTFzcSaMxjk6vdpKvT+2/mIdE07Gw2ykehT49O0z/VHS3zZ8iV/Gh8BJJKHWOe5RjaNrW5xf/GA==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -3195,6 +3223,8 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  '@lucide/lab@0.1.2': {}
+
   '@mdx-js/mdx@3.0.1':
     dependencies:
       '@types/estree': 1.0.5
@@ -3556,6 +3586,11 @@ snapshots:
   '@types/ws@8.5.12':
     dependencies:
       '@types/node': 22.5.1
+
+  '@uidotdev/usehooks@2.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   '@ungap/structured-clone@1.2.0': {}
 
@@ -3953,9 +3988,9 @@ snapshots:
 
   electron-to-chromium@1.5.13: {}
 
-  embla-carousel-autoplay@8.2.0(embla-carousel@8.2.0):
+  embla-carousel-autoplay@8.2.0(embla-carousel@8.2.1):
     dependencies:
-      embla-carousel: 8.2.0
+      embla-carousel: 8.2.1
 
   embla-carousel-react@8.2.0(react@18.3.1):
     dependencies:
@@ -3968,6 +4003,8 @@ snapshots:
       embla-carousel: 8.2.0
 
   embla-carousel@8.2.0: {}
+
+  embla-carousel@8.2.1: {}
 
   emmet@2.4.7:
     dependencies:
@@ -5594,6 +5631,55 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
+
+  vinos-astro@file:(@types/node@22.5.1)(rollup@4.21.1)(vite@5.4.2(@types/node@22.5.1)):
+    dependencies:
+      '@astrojs/check': 0.9.3(typescript@5.5.4)
+      '@astrojs/mdx': 3.1.5(astro@4.14.6(@types/node@22.5.1)(rollup@4.21.1)(typescript@5.5.4))
+      '@astrojs/react': 3.6.2(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.4.2(@types/node@22.5.1))
+      '@astrojs/tailwind': 5.1.0(astro@4.14.6(@types/node@22.5.1)(rollup@4.21.1)(typescript@5.5.4))(tailwindcss@3.4.10)
+      '@lucide/lab': 0.1.2
+      '@radix-ui/react-dialog': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-slot': 1.1.0(@types/react@18.3.4)(react@18.3.1)
+      '@supabase/supabase-js': 2.45.2
+      '@types/canvas-confetti': 1.6.4
+      '@types/react': 18.3.4
+      '@types/react-dom': 18.3.0
+      astro: 4.14.6(@types/node@22.5.1)(rollup@4.21.1)(typescript@5.5.4)
+      autoprefixer: 10.4.20(postcss@8.4.41)
+      canvas-confetti: 1.9.3
+      class-variance-authority: 0.7.0
+      clsx: 2.1.1
+      embla-carousel: 8.2.1
+      embla-carousel-autoplay: 8.2.0(embla-carousel@8.2.1)
+      embla-carousel-react: 8.2.0(react@18.3.1)
+      framer-motion: 11.3.31(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      lucide-react: 0.436.0(react@18.3.1)
+      postcss: 8.4.41
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      tailwind-merge: 2.5.2
+      tailwindcss: 3.4.10
+      tailwindcss-animate: 1.0.7(tailwindcss@3.4.10)
+      typescript: 5.5.4
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+      - '@types/node'
+      - bufferutil
+      - less
+      - lightningcss
+      - prettier
+      - prettier-plugin-astro
+      - rollup
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - utf-8-validate
+      - vite
 
   vite@5.4.2(@types/node@22.5.1):
     dependencies:

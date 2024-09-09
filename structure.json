@@ -1,136 +1,74 @@
-{
-  "Merlot": [
-    {
-      "id": 1,
-      "nombre": "Petirrojo",
-      "precio": 87.422,
-      "variedad": 5,
-      "id_unica": 245726,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/245726.png"
-    }
-  ],
-  "Malbec": [
-    {
-      "id": 2,
-      "nombre": "Posta Pizzella",
-      "precio": 98.842,
-      "variedad": 4,
-      "id_unica": 933404,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/933404.png"
+[
+  {
+    "headers": {
+      "X-Client-Info": "supabase-js-web/2.45.2"
     },
-    {
-      "id": 11,
-      "nombre": "Angelica Zapata",
-      "precio": 569.962,
-      "variedad": 4,
-      "id_unica": 850550,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/850550.png"
+    "method": "GET",
+    "schema": "public",
+    "url": "https://npuxpuelimayqrsmzqur.supabase.co/rest/v1/vinos?select=id%2Cnombre%2Cprecio%2Cvariedad%2Cid_unica%2Curl_imagen%2Cbodega%2Cvariedades%28id%2Cvariedad%2Ctipo%29%2Cpaises%28id%2Cpais%29&variedades.variedad=in.%28%29"
+  },
+  {
+    "headers": {
+      "X-Client-Info": "supabase-js-web/2.45.2"
     },
-    {
-      "id": 13,
-      "nombre": "Zuccardi Serie A",
-      "precio": 102.762,
-      "variedad": 4,
-      "id_unica": 438553,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/438553.png"
+    "method": "GET",
+    "schema": "public",
+    "url": "https://npuxpuelimayqrsmzqur.supabase.co/rest/v1/vinos?select=id%2Cnombre%2Cprecio%2Cvariedad%2Cid_unica%2Curl_imagen%2Cbodega%2Cvariedades%28id%2Cvariedad%2Ctipo%29%2Cpaises%28id%2Cpais%29&variedades.variedad=in.%28%29"
+  },
+  {
+    "headers": {
+      "X-Client-Info": "supabase-js-web/2.45.2"
     },
-    {
-      "id": 14,
-      "nombre": "Cerro Verde",
-      "precio": 91.362,
-      "variedad": 4,
-      "id_unica": 178631,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/178631.png"
-    }
-  ],
-  "Cabernet Sauvignon": [
-    {
-      "id": 3,
-      "nombre": "Marquez de villa de leyva",
-      "precio": 477.162,
-      "variedad": 2,
-      "id_unica": 948930,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/948930.png"
+    "method": "GET",
+    "schema": "public",
+    "url": "https://npuxpuelimayqrsmzqur.supabase.co/rest/v1/vinos?select=id%2Cnombre%2Cprecio%2Cvariedad%2Cid_unica%2Curl_imagen%2Cbodega%2Cvariedades%28id%2Cvariedad%2Ctipo%29%2Cpaises%28id%2Cpais%29&variedades.variedad=in.%28%29"
+  },
+  {
+    "headers": {
+      "X-Client-Info": "supabase-js-web/2.45.2"
     },
-    {
-      "id": 4,
-      "nombre": "Don Melchor",
-      "precio": 174.622,
-      "variedad": 2,
-      "id_unica": 543152,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/543152.png"
+    "method": "GET",
+    "schema": "public",
+    "url": "https://npuxpuelimayqrsmzqur.supabase.co/rest/v1/vinos?select=id%2Cnombre%2Cprecio%2Cvariedad%2Cid_unica%2Curl_imagen%2Cbodega%2Cvariedades%28id%2Cvariedad%2Ctipo%29%2Cpaises%28id%2Cpais%29&variedades.variedad=in.%28%29"
+  },
+  {
+    "headers": {
+      "X-Client-Info": "supabase-js-web/2.45.2"
     },
-    {
-      "id": 7,
-      "nombre": "Reserva de la Tierra",
-      "precio": 75.962,
-      "variedad": 2,
-      "id_unica": 323324,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/323324.png"
+    "method": "GET",
+    "schema": "public",
+    "url": "https://npuxpuelimayqrsmzqur.supabase.co/rest/v1/vinos?select=id%2Cnombre%2Cprecio%2Cvariedad%2Cid_unica%2Curl_imagen%2Cbodega%2Cvariedades%28id%2Cvariedad%2Ctipo%29%2Cpaises%28id%2Cpais%29&variedades.variedad=in.%28%29"
+  },
+  {
+    "headers": {
+      "X-Client-Info": "supabase-js-web/2.45.2"
     },
-    {
-      "id": 10,
-      "nombre": "Montes Alpha M",
-      "precio": 208.962,
-      "variedad": 2,
-      "id_unica": 782699,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/782699.png"
-    }
-  ],
-  "Carménère": [
-    {
-      "id": 5,
-      "nombre": "Purple Angel",
-      "precio": 113.962,
-      "variedad": 3,
-      "id_unica": 330628,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/330628.png"
-    }
-  ],
-  "Pinot Grigio": [
-    {
-      "id": 6,
-      "nombre": "Muga",
-      "precio": 75.962,
-      "variedad": 6,
-      "id_unica": 692159,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/692159.png"
+    "method": "GET",
+    "schema": "public",
+    "url": "https://npuxpuelimayqrsmzqur.supabase.co/rest/v1/vinos?select=id%2Cnombre%2Cprecio%2Cvariedad%2Cid_unica%2Curl_imagen%2Cbodega%2Cvariedades%28id%2Cvariedad%2Ctipo%29%2Cpaises%28id%2Cpais%29&variedades.variedad=in.%28%29"
+  },
+  {
+    "headers": {
+      "X-Client-Info": "supabase-js-web/2.45.2"
     },
-    {
-      "id": 8,
-      "nombre": "Maison Castel Gran Reserva",
-      "precio": 83.582,
-      "variedad": 6,
-      "id_unica": 191880,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/191880.png"
+    "method": "GET",
+    "schema": "public",
+    "url": "https://npuxpuelimayqrsmzqur.supabase.co/rest/v1/vinos?select=id%2Cnombre%2Cprecio%2Cvariedad%2Cid_unica%2Curl_imagen%2Cbodega%2Cvariedades%28id%2Cvariedad%2Ctipo%29%2Cpaises%28id%2Cpais%29&variedades.variedad=in.%28%29"
+  },
+  {
+    "headers": {
+      "X-Client-Info": "supabase-js-web/2.45.2"
     },
-    {
-      "id": 9,
-      "nombre": "Santa Margherita",
-      "precio": 189.962,
-      "variedad": 6,
-      "id_unica": 257609,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/257609.png"
-    }
-  ],
-  "Cabernet Franc": [
-    {
-      "id": 12,
-      "nombre": "Gran Enemigo",
-      "precio": 68.362,
-      "variedad": 1,
-      "id_unica": 652132,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/652132.png"
-    }
-  ],
-  "Tempranillo": [
-    {
-      "id": 15,
-      "nombre": "Codice",
-      "precio": 45.562,
-      "variedad": 7,
-      "id_unica": 265178,
-      "url_imagen": "https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/images/265178.png"
-    }
-  ]
-}
+    "method": "GET",
+    "schema": "public",
+    "url": "https://npuxpuelimayqrsmzqur.supabase.co/rest/v1/vinos?select=id%2Cnombre%2Cprecio%2Cvariedad%2Cid_unica%2Curl_imagen%2Cbodega%2Cvariedades%28id%2Cvariedad%2Ctipo%29%2Cpaises%28id%2Cpais%29&variedades.variedad=in.%28%29"
+  },
+  {
+    "headers": {
+      "X-Client-Info": "supabase-js-web/2.45.2"
+    },
+    "method": "GET",
+    "schema": "public",
+    "url": "https://npuxpuelimayqrsmzqur.supabase.co/rest/v1/vinos?select=id%2Cnombre%2Cprecio%2Cvariedad%2Cid_unica%2Curl_imagen%2Cbodega%2Cvariedades%28id%2Cvariedad%2Ctipo%29%2Cpaises%28id%2Cpais%29&variedades.variedad=in.%28%29"
+  }
+]

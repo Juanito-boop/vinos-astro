@@ -1,7 +1,5 @@
 ---
-import '@/globals.css'
-
-import LayoutPrincipal from '../layouts/main.astro'
+import LayoutPrincipal from '@/layouts/main.astro'
 import MainHeader from '@/components/mainHeader/MainHeader.astro'
 import AsideMain from '@/components/asideMain/AsideMain.astro'
 import BodyCards from '@/components/mainBody/CardsMain.astro'
@@ -9,7 +7,7 @@ import BodyCards from '@/components/mainBody/CardsMain.astro'
 
 <LayoutPrincipal title='Astro + TailwindCSS + React + shadcn'>
 	<MainHeader />
-	<section class="grid grid-flow-col grid-cols-[1fr,80%] mx-2.5 gap-x-2">
+	<section class="grid grid-flow-col grid-cols-[20%,1fr] mx-2.5 gap-x-2">
 		<AsideMain />
 		<BodyCards />
 	</section>
