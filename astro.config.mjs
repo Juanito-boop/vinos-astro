@@ -7,6 +7,6 @@ import react from "@astrojs/react";
 export default defineConfig({
   site: 'https://Juanito-boop.github.io',
   base: '/',
-  output: "hybrid",
+  output: "static",
   integrations: [tailwind({ applyBaseStyles: false }), react()],
 });

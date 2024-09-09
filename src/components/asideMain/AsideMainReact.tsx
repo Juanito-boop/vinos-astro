@@ -39,7 +39,7 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
   );
 };
 
-function AsideWithFilters({ variedades, paises }: Readonly<AsideMainClientProps>) {
+function AsideWithFilters({ variedades }: Readonly<AsideMainClientProps>) {
   const { clearAllSelections } = useGlobalSelection();
 
   return (
@@ -67,10 +67,10 @@ function AsideWithFilters({ variedades, paises }: Readonly<AsideMainClientProps>
   );
 }
 
-export default function AsideMainReact({ variedades, paises }: Readonly<AsideMainClientProps>) {
+export default function AsideMainReact({ variedades }: Readonly<AsideMainClientProps>) {
   return (
     <GlobalSelectionProvider>
-      <AsideWithFilters variedades={variedades} paises={paises} />
+      <AsideWithFilters variedades={variedades} />
     </GlobalSelectionProvider>
   );
 }
