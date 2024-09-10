@@ -3,11 +3,6 @@ interface Variedades {
   variedad: string;
 }
 
-// interface Paises {
-//   id: number;
-//   pais: string;
-// }
-
 export interface AsideMainClientProps {
   variedades: Variedades[];
 }

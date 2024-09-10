@@ -27,8 +27,11 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
               id={`checkbox-${item.id}`}
               name={item.name}
               value={item.name}
-              checked={selectedItems.includes(item.name)} 
-              onChange={() => toggleItem(storageKey, item.name)} 
+              checked={selectedItems.includes(item.name)}
+              onChange={() => {
+                toggleItem(storageKey, item.name)
+                window.location.reload();
+              }} // Sin reload
               className="mr-2"
             />
             <label className='w-full text-balance' htmlFor={`checkbox-${item.id}`}>{item.name}</label>
@@ -59,7 +62,10 @@ function AsideWithFilters({ variedades }: Readonly<AsideMainClientProps>) {
       />
       <button
         className="p-2 mx-auto mt-4 text-white bg-red-500 rounded-lg"
-        onClick={clearAllSelections}
+        onClick={() => {
+          clearAllSelections();
+          window.location.reload();
+        }}
       >
         Limpiar Filtro
       </button>
