@@ -1,0 +1,30 @@
+{
+  "recommendations": [
+    "IBM.output-colorizer",
+    "SheltonLouis.astro-snippets",
+    "WallabyJs.console-ninja",
+    "WallabyJs.quokka-vscode",
+    "astro-build.astro-vscode",
+    "aykutsarac.jsoncrack-vscode",
+    "bradlc.vscode-tailwindcss",
+    "cweijan.vscode-postgresql-client2",
+    "deerawan.vscode-faker",
+    "dineug.vuerd-vscode",
+    "github.copilot-chat",
+    "heybourn.headwind",
+    "kisstkondoros.vscode-gutter-preview",
+    "miguelsolorio.fluent-icons",
+    "miguelsolorio.symbols",
+    "nachokhan.pstruc-ext",
+    "rangav.vscode-thunder-client",
+    "richie5um2.vscode-sort-json",
+    "stivo.tailwind-fold",
+    "talhabalaj.actual-font-changer",
+    "throwbly.focus",
+    "usernamehw.errorlens",
+    "esbenp.prettier-vscode",
+    "github.vscode-github-actions",
+    "github.codespaces"
+  ],
+  "unwantedRecommendations": []
+}
