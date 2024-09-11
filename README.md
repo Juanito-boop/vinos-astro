@@ -1,13 +1,114 @@
-# Astro with Tailwind
-
-```sh
-npm create astro@latest -- --template with-tailwindcss
-```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/with-tailwindcss)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/with-tailwindcss)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/with-tailwindcss/devcontainer.json)
-
-Astro comes with [Tailwind](https://tailwindcss.com) support out of the box. This example showcases how to style your Astro project with Tailwind.
-
-For complete setup instructions, please see our [Tailwind Integration Guide](https://docs.astro.build/en/guides/integrations-guide/tailwind).
+{
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "codium.codeCompletion.enable": true,
+  "console-ninja.featureSet": "Community",
+  "dineug.erd-editor.theme.accentColor": "jade",
+  "dineug.erd-editor.theme.appearance": "dark",
+  "dineug.erd-editor.theme.grayColor": "slate",
+  "editor.fontFamily": "Monaspace Neon Light",
+  "editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'calt', 'dlig'",
+  "editor.fontSize": 12,
+  "editor.fontVariations": "'slant' -11",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "editor.largeFileOptimizations": false,
+  "editor.minimap.enabled": false,
+  "editor.tabSize": 2,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  "editor.wordWrap": "on",
+  "explorer.confirmDelete": false,
+  "files.autoSave": "afterDelay",
+  "git.suggestSmartCommit": false,
+  "github.copilot.chat.localeOverride": "es",
+  "github.copilot.editor.enableAutoCompletions": true,
+  "java.configuration.runtimes": [
+    {
+      "default": true,
+      "name": "JavaSE-17",
+      "path": "C:\\Program Files\\Java\\jdk-17"
+    }
+  ],
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "json.schemas": [
+    {
+      "fileMatch": ["/*.json"],
+      "schema": true,
+      "url": "https://json.schemastore.org/package"
+    }
+  ],
+  "remote.downloadExtensionsLocally": true,
+  "sonarlint.rules": {
+    "java:S120": {
+      "level": "off"
+    },
+    "typescript:S6850": {
+      "level": "off"
+    }
+  },
+  "symbols.hidesExplorerArrows": false,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorStyleInactive": "line",
+  "terminal.integrated.env.linux": {},
+  "terminal.integrated.env.windows": {},
+  "terminal.integrated.fontFamily": "'MonaspiceAr Nerd Font Mono'",
+  "terminal.integrated.shellIntegration.history": 0,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterTypes.enabled": true,
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.activityBar.location": "top",
+  "workbench.colorCustomizations": {
+    "editorCursor.foreground": "#00aae4",
+    "terminal.foreground": "#aeab99",
+    "terminalCursor.foreground": "#00aae4"
+  },
+  "workbench.colorTheme": "focus",
+  "workbench.iconTheme": "symbols",
+  "workbench.productIconTheme": "fluent-icons",
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "none",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typeScriptWizard.hiddenTips": [
+    "typing-function-parameters",
+    "passing-generics-to-types",
+    "readonly-utility-type",
+    "array-type",
+    "basic-types",
+    "interface-declaration",
+    "optional-object-property",
+    "ts-object-type",
+    "variable-type-annotation",
+    "function-return-type",
+    "type-alias-declaration",
+    "literal-type",
+    "typeof"
+  ],
+  "typeScriptWizard.hideAllTips": false,
+  "typeScriptWizard.hideBasicTips": false,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
