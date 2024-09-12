@@ -38,7 +38,7 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = (props) => {
         <div className="embla__container">
           {vinos.map((vino, _index) => (
             <ModalInfo key={vino.id_unica} elemento={`${vino.nombre}~${vino.variedades.variedad}`.replace(/\s+/g, '-')}>
-              <Card className="flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-lg basis-1/3 mx-1.5">
+              <Card className="flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-lg basis-1/3 mx-2">
                 <div className="relative aspect-square">
                   <img src={vino.url_imagen} alt={vino.nombre} className="object-cover w-full h-full bg-gray-400" />
                   <Badge className='absolute top-2 right-2 text-base px-5' variant="default">{vino.variedades.tipo}</Badge>

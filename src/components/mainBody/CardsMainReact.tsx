@@ -68,14 +68,14 @@ function CardsMainReact() {
 	}, {});
 
 	return (
-		<main className="pt-3 pb-1 bg-normalColor11 rounded-r-xl">
+		<main className="p-3 pb-1 bg-normalColor11 rounded-r-xl">
 			{Object.keys(vinosFiltrados).map((variedad) => (
 				<EmblaCarousel
 					key={variedad}
 					titulo={variedad.toString()}
 					options={{
 						align: 'start',
-						loop: false,
+						loop: true,
 					}}
 					vinos={vinosFiltrados[variedad]}
 				/>
