@@ -1,8 +1,9 @@
+import ModalInfo from '@/components/modales/infoProducto/ModalInfo';
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from '@/components/ui/card';
 import { wineGlassBottle } from '@lucide/lab';
 import useEmblaCarousel from 'embla-carousel-react';
 import { Grape, Icon } from 'lucide-react';
-import { Badge } from "@/components/ui/badge"
 import React from 'react';
 import type { EmblaCarouselProps } from '../interface';
 import {
@@ -10,7 +11,6 @@ import {
 	PrevButton,
 	usePrevNextButtons
 } from './EmblaCarouselArrowButtons';
-import ModalInfo from '@/components/modales/infoProducto/ModalInfo';
 
 const EmblaCarousel: React.FC<EmblaCarouselProps> = (props) => {
 	const { titulo, options, vinos } = props
@@ -68,13 +68,21 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = (props) => {
 					))}
 				</div>
 			</div>
-
-			<div className="embla__controls">
-				<div className="embla__buttons">
-					<PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-					<NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+			{vinos.length > 3 ? (
+				<div className="embla__controls">
+					<div className="embla__buttons">
+						<PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+						<NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+					</div>
 				</div>
-			</div>
+			) : (
+				<div className="embla__controls">
+					<div className="embla__buttons">
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+			)}
 		</section>
 	)
 }

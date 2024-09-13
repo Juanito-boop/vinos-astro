@@ -68,7 +68,7 @@ function CardsMainReact() {
 	}, {});
 
 	return (
-		<main className="p-3 pb-1 bg-normalColor11 rounded-r-xl">
+		<main className="p-3 pb-5 bg-normalColor11 rounded-r-xl">
 			{Object.keys(vinosFiltrados).map((variedad) => (
 				<EmblaCarousel
 					key={variedad}
