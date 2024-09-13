@@ -14,6 +14,11 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
     }
   }, [areAllChecked, storageKey]);
 
+  const handleCheckboxChange = (itemName: string) => {
+    toggleItem(storageKey, itemName);
+    window.location.reload();
+  };
+
   return (
     <section className="w-full col-span-1 pb-2 border-t bg-normalColor11 border-principalColor1 rounded-b-xl">
       <span className="flex items-center justify-center my-2 text-xl font-bold text-principalColor1">
@@ -28,10 +33,7 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
               name={item.name}
               value={item.name}
               checked={selectedItems.includes(item.name)}
-              onChange={() => {
-                toggleItem(storageKey, item.name)
-                window.location.reload();
-              }} // Sin reload
+              onChange={() => handleCheckboxChange(item.name)}
               className="mr-2"
             />
             <label className='w-full text-balance' htmlFor={`checkbox-${item.id}`}>{item.name}</label>
@@ -42,8 +44,13 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
   );
 };
 
-function AsideWithFilters({ variedades }: Readonly<AsideMainClientProps>) {
+const AsideWithFilters = ({ variedades }: Readonly<AsideMainClientProps>) => {
   const { clearAllSelections } = useGlobalSelection();
+
+  const handleClearFilters = () => {
+    clearAllSelections();
+    window.location.reload();
+  };
 
   return (
     <aside className="flex flex-col rounded-l-xl bg-normalColor11">
@@ -62,21 +69,18 @@ function AsideWithFilters({ variedades }: Readonly<AsideMainClientProps>) {
       />
       <button
         className="p-2 mx-auto mt-4 text-white bg-red-500 rounded-lg"
-        onClick={() => {
-          clearAllSelections();
-          window.location.reload();
-        }}
+        onClick={handleClearFilters}
       >
         Limpiar Filtro
       </button>
     </aside>
   );
-}
+};
 
-export default function AsideMainReact({ variedades }: Readonly<AsideMainClientProps>) {
-  return (
-    <GlobalSelectionProvider>
-      <AsideWithFilters variedades={variedades} />
-    </GlobalSelectionProvider>
-  );
-}
+const AsideMainReact = ({ variedades }: Readonly<AsideMainClientProps>) => (
+  <GlobalSelectionProvider>
+    <AsideWithFilters variedades={variedades} />
+  </GlobalSelectionProvider>
+);
+
+export default AsideMainReact;
