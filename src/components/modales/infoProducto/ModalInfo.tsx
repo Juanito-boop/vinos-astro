@@ -5,11 +5,12 @@ import {
 } from "@/components/ui/dialog"
 import { supabase } from "@/lib/supabase";
 import type { Wine } from "@/pages/interface";
-import { useCallback, useEffect, useState, type ReactNode } from "react"
+import { useState, useEffect, useCallback, type ReactNode } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { GlassWater, Grape } from "lucide-react"
 import Bandera from "./Banderas";
+import useCart from '@/hooks/useCart';
 
 interface ModalInfoProps {
   children: ReactNode;
@@ -45,8 +46,6 @@ export default function ModalInfo({ children, elemento }: Readonly<ModalInfoProp
   const [vino, setVino] = useState<Wine>();
   const { nombre, variedad } = separarElemento(elemento);
 
-  separarElemento(elemento);
-
   const fetchData = useCallback(async () => {
     try {
       let { data: variedades, error: errorVariedades } = await supabase
@@ -76,7 +75,6 @@ export default function ModalInfo({ children, elemento }: Readonly<ModalInfoProp
         throw new Error('No se encontró el vino con el nombre y variedad especificados.');
       }
 
-
       const fetched = vinos[0] as Wine;
       setVino(fetched);
     } catch (error) {
@@ -86,7 +84,7 @@ export default function ModalInfo({ children, elemento }: Readonly<ModalInfoProp
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

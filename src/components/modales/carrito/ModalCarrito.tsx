@@ -1,131 +1,125 @@
-import { useEffect } from "react";
-import useCart from "@/hooks/useCart"; // Importa tu hook personalizado
-import type { ModalCarritoProps } from "../interface";
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger
+} from "@/components/ui/dialog"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import useCart from '@/hooks/useCart'
+import { Edit, Save, ShoppingCart } from "lucide-react"
+import { useEffect, useState } from 'react'
 
-export default function ModalCarrito({
-  isModalOpen,
-  setIsModalOpen,
-}: Readonly<ModalCarritoProps>) {
-  const { cart, removeFromCart } = useCart(); // Utiliza el carrito desde el hook
+export default function ModalCarrito() {
+  const [open, setOpen] = useState(false)
+  const { cart, removeFromCart, updateCartItem } = useCart()
+  const [editingId, setEditingId] = useState<number | null>(null)
+  const [editQuantity, setEditQuantity] = useState<number>(0)
+  const [localCart, setLocalCart] = useState(cart)
 
   useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsModalOpen(false);
-      }
-    };
+    setLocalCart(cart)
+  }, [cart])
 
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-      document.addEventListener("keydown", handleEscape);
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    return () => {
-      document.body.style.overflow = "unset";
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [isModalOpen, setIsModalOpen]);
-
-  if (!isModalOpen) return null;
-
-  function renderHeader() {
-    return (
-      <div className="flex justify-between p-2">
-        <button className="mr-auto inline-flex items-center rounded-lg bg-transparent p-1.5">
-          <picture>
-            <img src="/carrito.svg" alt="Carrito" className="h-5 w-5" />
-          </picture>
-        </button>
-        <button
-          onClick={() => setIsModalOpen(false)}
-          type="button"
-          className="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
-        >
-          <svg
-            className="h-5 w-5"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </button>
-      </div>
-    );
+  const handleRemove = (productId: number) => {
+    removeFromCart(productId)
+    setLocalCart(prevCart => prevCart.filter(item => item.productId !== productId))
   }
 
-  function displayCartItems(): JSX.Element {
-    return (
-      <div className="pb-3 pt-0 grid grid-rows-[10%_8%_92%] h-full">
-        <h3 className="text-xl font-normal text-gray-500 text-center row-start-1 my-auto">
-          Este es tu carrito de compras
-        </h3>
-        <div className="row-start-2 grid grid-cols-[10%_1fr_15%_15%] gap-x-1 rounded px-3">
-          <span className="text-lg text-start col-start-1">{"ID"}</span>
-          <span className="text-lg text-start col-start-2">{"Producto"}</span>
-          <span className="text-lg text-center col-start-3">{"Cantidad"}</span>
-          <span className="text-lg text-center col-start-4">Precio</span>
-        </div>
-        <div className="row-start-3 flex flex-col gap-1 mt-2 overflow-y-scroll">
-          {cart.length > 0 ? (
-            cart.map((item, index) => (
-              <div
-                key={item.productId}
-                className={`grid grid-cols-[10%_1fr_15%_15%] gap-x-1 rounded px-3 py-1.5 ${index % 2 === 0 ? "bg-blue-100" : "bg-green-100"
-                  }`}
-              >
-                <span className="text-lg col-start-1 text-start">{item.productId}</span>
-                <span className="text-lg col-start-2 text-start">{item.nombre}</span>
-                <span className="text-lg col-start-3 text-center">{item.quantity}</span>
-                <span className="text-lg col-start-4 text-center">{"$" + item.price}</span>
-                <button
-                  className="text-red-500 col-span-4 mt-2"
-                  onClick={() => removeFromCart(item.productId)}
-                >
-                  Eliminar
-                </button>
-              </div>
-            ))
-          ) : (
-            <div className="text-lg my-3 bg-blue-100 p-3 text-center">
-              No hay elementos en el carrito.
-            </div>
-          )}
-        </div>
-      </div>
-    );
+  const handleEdit = (productId: number, quantity: number) => {
+    setEditingId(productId)
+    setEditQuantity(quantity)
   }
+
+  const handleSave = (productId: number) => {
+    updateCartItem(productId, editQuantity)
+    setEditingId(null)
+    setLocalCart(prevCart => prevCart.map(item =>
+      item.productId === productId ? { ...item, quantity: editQuantity } : item
+    ))
+  }
+
+  const totalPrice = localCart.reduce((total, item) => total + item.price * item.quantity, 0)
+  console.log(typeof window !== 'undefined' && window.localStorage.getItem('cart')?.length)
 
   return (
-    <div
-      className={
-        "fixed z-50 inset-0 bg-gray-900/60 " +
-        "grid grid-cols-[1fr_70%_1fr] grid-rows-[1fr_80%_1fr]"
-      }>
-      <div
-        className={
-          "col-start-2 row-start-2 mx-auto w-full shadow-xl rounded-lg bg-white max-w-4xl " +
-          "grid grid-rows-[85%_1fr]"
-        }>
-        <div className="p-3 pb-0 row-start-1 max-h-[85%]">
-          {renderHeader()}
-          {displayCartItems()}
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline" className='bg-normalColor11 text-white border-none hover:invert-0'>
+          <ShoppingCart className="mr-2 h-4 w-4" />
+          Carrito (
+          {typeof window !== 'undefined' && window.localStorage.getItem('cart')?.length}
+          )
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-[70%]">
+        <DialogTitle className="flex items-center">
+          <ShoppingCart className="mr-2 h-5 w-5" />
+          Carrito de Compras
+        </DialogTitle>
+        <div className="max-h-[60vh] overflow-auto">
+          {localCart.length === 0 ? (
+            <p>El carrito está vacío</p>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Producto</TableHead>
+                    <TableHead>Cantidad</TableHead>
+                    <TableHead className="text-right">Precio</TableHead>
+                    <TableHead>Acciones</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {localCart.map((item) => (
+                    <TableRow key={item.productId}>
+                      <TableCell>{item.nombre}</TableCell>
+                      <TableCell>
+                        {editingId === item.productId ? (
+                          <input
+                            type="number"
+                            min="1"
+                            value={editQuantity}
+                            onChange={(e) => setEditQuantity(parseInt(e.target.value))}
+                            className="w-16 p-1 border rounded"
+                          />
+                        ) : (
+                          item.quantity
+                        )}
+                      </TableCell>
+                      <TableCell className="text-right">${(item.price * item.quantity).toFixed(2)}</TableCell>
+                      <TableCell>
+                        {editingId === item.productId ? (
+                          <Button onClick={() => handleSave(item.productId)} variant="outline" size="sm">
+                            <Save className="h-4 w-4" />
+                          </Button>
+                        ) : (
+                          <Button onClick={() => handleEdit(item.productId, item.quantity)} variant="outline" size="sm">
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                        )}
+                        <Button onClick={() => handleRemove(item.productId)} variant="destructive" size="sm" className="ml-2">
+                          Eliminar
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )
+          }
         </div>
-        <div className="row-start-2 flex flex-row justify-end bg-white">
-          <button
-            className="my-auto py-2 px-4 mx-5 text-lg border rounded bg-green-500 text-white uppercase"
-            onClick={() => setIsModalOpen(false)}
-          >
-            Pagar
-          </button>
+        <div className="mt-4 text-right">
+          <strong>Total: ${totalPrice.toFixed(2)}</strong>
         </div>
-      </div>
-    </div>
-  );
+      </DialogContent>
+    </Dialog>
+  )
 }

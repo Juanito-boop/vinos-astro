@@ -34,7 +34,7 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = (props) => {
 
 	return (
 		<section>
-			<h2 className='w-full my-3 text-3xl text-center'>{titulo}</h2>
+			<h2 className='my-3 text-3xl text-center text-[#fdcd57] font-bold uppercase'>{titulo}</h2>
 			<div className="embla__viewport" ref={emblaRef}>
 				<div className="embla__container">
 					{vinos.map((vino, _index) => (

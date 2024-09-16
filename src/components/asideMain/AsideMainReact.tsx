@@ -1,11 +1,12 @@
-import ModalCarrito from '@/components/modales/carrito/ModernModalWithCartIcon';
+import ModalCarrito from '@/components/modales/carrito/ModalCarrito';
+import useCart from '@/hooks/useCart';
 import { GlobalSelectionProvider, useGlobalSelection } from '@/hooks/useGlobalSelection';
+import { useEffect, useState } from 'react';
 import type { AsideMainClientProps } from './interface';
-import { useEffect } from 'react';
 
 const RenderList = ({ items, title, storageKey }: { items: { id: number; name: string, arreglo: string }[], title: string, storageKey: string }) => {
-  const { getSelectedItems, toggleItem, clearSelectionForKey } = useGlobalSelection();
-  const selectedItems = getSelectedItems(storageKey);
+  const { toggleItem, clearSelectionForKey } = useGlobalSelection();
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const areAllChecked = selectedItems.length === items.length && items.length > 0;
 
   useEffect(() => {
@@ -16,12 +17,16 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
 
   const handleCheckboxChange = (itemName: string) => {
     toggleItem(storageKey, itemName);
-    window.location.reload();
+    setSelectedItems((prevItems) =>
+      prevItems.includes(itemName)
+        ? prevItems.filter(item => item !== itemName)
+        : [...prevItems, itemName]
+    );
   };
 
   return (
     <section className="w-full col-span-1 pb-2 border-t bg-normalColor11 border-principalColor1 rounded-b-xl">
-      <span className="flex items-center justify-center my-2 text-xl font-bold text-principalColor1">
+      <span className="flex items-center justify-center my-2 text-xl font-bold text-[#fdcd57]">
         {title}
       </span>
       <ul className="flex flex-col gap-2">
@@ -36,7 +41,7 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
               onChange={() => handleCheckboxChange(item.name)}
               className="mr-2"
             />
-            <label className='w-full text-balance' htmlFor={`checkbox-${item.id}`}>{item.name}</label>
+            <label className='w-full text-balance text-white' htmlFor={`checkbox-${item.id}`}>{item.name}</label>
           </li>
         ))}
       </ul>
@@ -46,6 +51,19 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
 
 const AsideWithFilters = ({ variedades }: Readonly<AsideMainClientProps>) => {
   const { clearAllSelections } = useGlobalSelection();
+  const { cartItemsCount } = useCart();
+  const [, setCartUpdate] = useState(0);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setCartUpdate(prev => prev + 1);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   const handleClearFilters = () => {
     clearAllSelections();
@@ -54,10 +72,10 @@ const AsideWithFilters = ({ variedades }: Readonly<AsideMainClientProps>) => {
 
   return (
     <aside className="flex flex-col rounded-l-xl bg-normalColor11">
-      <div className='mx-auto mt-3'>
-        <ModalCarrito />
+      <div className='mx-auto py-2'>
+        <ModalCarrito key={cartItemsCount} />
       </div>
-      <span className="flex items-center justify-center text-[1.5em] font-bold text-principalColor1 bg-normalColor11 rounded-t-xl px-5 py-2">FILTROS</span>
+      <span className="flex items-center justify-center text-[1.5em] font-bold text-[#fdcd57] bg-normalColor11 rounded-t-xl px-5 py-2">FILTROS</span>
       <RenderList
         items={variedades.map((v) => ({
           id: v.id,
