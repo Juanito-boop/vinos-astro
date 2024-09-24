@@ -43,7 +43,10 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
               name={item.name}
               value={item.name}
               checked={selectedItems.includes(item.name)}
-              onChange={() => handleCheckboxChange(item.name)}
+              onChange={() => {
+                handleCheckboxChange(item.name);
+                window.location.reload();
+              }}
               className="mr-2"
             />
             <label className='w-full text-balance text-white' htmlFor={`checkbox-${item.id}`}>{item.name}</label>
