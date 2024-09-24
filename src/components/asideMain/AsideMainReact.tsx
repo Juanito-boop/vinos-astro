@@ -1,5 +1,3 @@
-import ModalCarrito from '@/components/modales/carrito/ModalCarrito';
-import useCart from '@/hooks/useCart';
 import { GlobalSelectionProvider, useGlobalSelection } from '@/hooks/useGlobalSelection';
 import { useEffect, useState } from 'react';
 import type { AsideMainClientProps } from './interface';
@@ -17,12 +15,19 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
 
   const handleCheckboxChange = (itemName: string) => {
     toggleItem(storageKey, itemName);
-    setSelectedItems((prevItems) =>
-      prevItems.includes(itemName)
+    setSelectedItems((prevItems) => {
+      const updatedItems = prevItems.includes(itemName)
         ? prevItems.filter(item => item !== itemName)
-        : [...prevItems, itemName]
-    );
+        : [...prevItems, itemName];
+      localStorage.setItem(storageKey, JSON.stringify(updatedItems));
+      return updatedItems;
+    });
   };
+
+  useEffect(() => {
+    const storedItems = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    setSelectedItems(storedItems);
+  }, [storageKey]);
 
   return (
     <section className="w-full col-span-1 pb-2 border-t bg-normalColor11 border-principalColor1 rounded-b-xl">
@@ -51,7 +56,7 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
 
 const AsideWithFilters = ({ variedades }: Readonly<AsideMainClientProps>) => {
   const { clearAllSelections } = useGlobalSelection();
-  const { cartItemsCount } = useCart();
+  // const { cartItemsCount } = useCart();
   const [, setCartUpdate] = useState(0);
 
   useEffect(() => {
@@ -72,9 +77,6 @@ const AsideWithFilters = ({ variedades }: Readonly<AsideMainClientProps>) => {
 
   return (
     <aside className="flex flex-col rounded-l-xl bg-normalColor11">
-      <div className='mx-auto py-2'>
-        <ModalCarrito key={cartItemsCount} />
-      </div>
       <span className="flex items-center justify-center text-[1.5em] font-bold text-[#fdcd57] bg-normalColor11 rounded-t-xl px-5 py-2">FILTROS</span>
       <RenderList
         items={variedades.map((v) => ({

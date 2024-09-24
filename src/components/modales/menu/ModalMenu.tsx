@@ -14,8 +14,8 @@ export default function ModalMenu() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className='bg-normalColor11 border-none my-auto py-1 size-auto'>
-          <Menu className="h-9 w-9" />
+        <Button variant="outline" className='bg-normalColor11 border-none my-auto py-1 size-auto hover:bg-principalColor2'>
+          <Menu className="h-9 w-9 text-[#fdcd57]" />
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[50%]">

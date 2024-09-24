@@ -1,16 +1,14 @@
+import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 import { supabase } from "@/lib/supabase";
 import type { Wine } from "@/pages/interface";
-import { useState, useEffect, useCallback, type ReactNode } from "react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { GlassWater, Grape } from "lucide-react"
+import { GlassWater, Grape } from "lucide-react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import Bandera from "./Banderas";
-import useCart from '@/hooks/useCart';
 
 interface ModalInfoProps {
   children: ReactNode;
@@ -45,6 +43,7 @@ export default function ModalInfo({ children, elemento }: Readonly<ModalInfoProp
   const [open, setOpen] = useState(false);
   const [vino, setVino] = useState<Wine>();
   const { nombre, variedad } = separarElemento(elemento);
+
 
   const fetchData = useCallback(async () => {
     try {
@@ -125,12 +124,12 @@ export default function ModalInfo({ children, elemento }: Readonly<ModalInfoProp
             <p className="text-gray-600 row-start-3 border-b mt-3">{vino?.descripcion}</p>
             <p className="text-gray-600 row-start-3 border-b mt-3">{vino?.notas_cata}</p>
           </div>
-          <div className="w-full flex items-center justify-between">
+          <div className="w-full flex items-center justify-end pb-5">
             <div className="flex items-baseline">
-              <span className="text-3xl font-bold text-gray-900">${vino?.precio} COP</span>
-              <span className="ml-2 text-sm text-gray-500">/ botella</span>
+              <span className="text-4xl font-bold text-gray-900">${vino?.precio} COP</span>
+              <span className="ml-2 text-xl text-gray-500">/ botella</span>
             </div>
-            <Button size="lg" className="px-8">Añadir al carrito</Button>
+            {/* <Button size="lg" className="px-8">Añadir al carrito</Button> */}
           </div>
         </div>
       </DialogContent>
