@@ -1,27 +1,19 @@
 export interface Wine {
-  id:                  number;
-  nombre:              string;
-  variedad:            number;
-  anada:               number;
-  bodega:              string;
-  pais:                number;
-  region:              string;
-  precio:              number;
-  stock:               number;
-  tipo:                Tipo;
-  nivel_alcohol:       number;
-  tipo_barrica:        string;
-  descripcion:         string;
-  notas_cata:          string;
-  temperatura_consumo: string;
-  maridaje:            string;
-  activo:              boolean;
-  id_unica:            number;
-  url_imagen:          string;
-  promocion:           boolean;
-  busqueda:            number;
-  variedades:          Variedades;
-  paises:              Paises;
+  id_vino: string;
+  nombre: string;
+  precio: string;
+  bodega: string;
+  anada: number;
+  notas_cata: string;
+  url_imagen: string;
+  descripcion: string;
+  nivel_alcohol: number;
+  variedades: string[];
+  pais_importacion: string;
+  color_vino: "Blanco" | "Tinto";
+  contenido_azucar: "Seco" | "Semiseco";
+  contenido_carbonico: "Tranquilo";
+  tipo_crianza: string;
 }
 
 export interface Paises {

@@ -2,16 +2,9 @@ import { GlobalSelectionProvider, useGlobalSelection } from '@/hooks/useGlobalSe
 import { useEffect, useState } from 'react';
 import type { AsideMainClientProps } from './interface';
 
-const RenderList = ({ items, title, storageKey }: { items: { id: number; name: string, arreglo: string }[], title: string, storageKey: string }) => {
-  const { toggleItem, clearSelectionForKey } = useGlobalSelection();
+const RenderList = ({ items, title, storageKey, setIsAnyChecked }: { items: { id: number; name: string, arreglo: string }[], title: string, storageKey: string, isAnyChecked: boolean, setIsAnyChecked: (value: boolean) => void }) => {
+  const { toggleItem } = useGlobalSelection();
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const areAllChecked = selectedItems.length === items.length && items.length > 0;
-
-  useEffect(() => {
-    if (areAllChecked) {
-      clearSelectionForKey(storageKey);
-    }
-  }, [areAllChecked, storageKey]);
 
   const handleCheckboxChange = (itemName: string) => {
     toggleItem(storageKey, itemName);
@@ -20,6 +13,7 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
         ? prevItems.filter(item => item !== itemName)
         : [...prevItems, itemName];
       localStorage.setItem(storageKey, JSON.stringify(updatedItems));
+      setIsAnyChecked(updatedItems.length > 0);
       return updatedItems;
     });
   };
@@ -27,11 +21,19 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
   useEffect(() => {
     const storedItems = JSON.parse(localStorage.getItem(storageKey) || '[]');
     setSelectedItems(storedItems);
-  }, [storageKey]);
+    setIsAnyChecked(storedItems.length > 0);
+  }, [storageKey, setIsAnyChecked]);
+
+  const handleTitleClick = () => {
+
+  };
 
   return (
     <section className="w-full col-span-1 pb-2 border-t bg-normalColor11 border-principalColor1 rounded-b-xl">
-      <span className="flex items-center justify-center my-2 text-xl font-bold text-[#fdcd57]">
+      <span 
+        className="flex items-center justify-center my-2 text-xl font-bold text-[#fdcd57] cursor-pointer"
+        onClick={handleTitleClick}
+      >
         {title}
       </span>
       <ul className="flex flex-col gap-2">
@@ -48,7 +50,7 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
                 window.location.reload();
               }}
               className="mr-2"
-            />
+              />
             <label className='w-full text-balance text-white' htmlFor={`checkbox-${item.id}`}>{item.name}</label>
           </li>
         ))}
@@ -57,21 +59,9 @@ const RenderList = ({ items, title, storageKey }: { items: { id: number; name: s
   );
 };
 
-const AsideWithFilters = ({ variedades }: Readonly<AsideMainClientProps>) => {
+const AsideWithFilters = ({ variedades, paises }: Readonly<AsideMainClientProps>) => {
   const { clearAllSelections } = useGlobalSelection();
-  // const { cartItemsCount } = useCart();
-  const [, setCartUpdate] = useState(0);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setCartUpdate(prev => prev + 1);
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
+  const [isAnyChecked, setIsAnyChecked] = useState(false);
 
   const handleClearFilters = () => {
     clearAllSelections();
@@ -81,6 +71,7 @@ const AsideWithFilters = ({ variedades }: Readonly<AsideMainClientProps>) => {
   return (
     <aside className="flex flex-col rounded-l-xl bg-normalColor11">
       <span className="flex items-center justify-center text-[1.5em] font-bold text-[#fdcd57] bg-normalColor11 rounded-t-xl px-5 py-2">FILTROS</span>
+      {/* <span className='text-2xl text-[#fdcd57] text-center px-2'>Los Filtros no estan disponibles por el momento</span> */}
       <RenderList
         items={variedades.map((v) => ({
           id: v.id,
@@ -89,6 +80,19 @@ const AsideWithFilters = ({ variedades }: Readonly<AsideMainClientProps>) => {
         }))}
         title="VARIEDADES"
         storageKey="selectedItems_variedades"
+        isAnyChecked={isAnyChecked}
+        setIsAnyChecked={setIsAnyChecked}
+      />
+      <RenderList
+        items={paises.map((p) => ({
+          id: p.id, 
+          name: p.pais,
+          arreglo: "paises"
+        }))}
+        title="PAISES"
+        storageKey="selectedItems_paises"
+        isAnyChecked={isAnyChecked}
+        setIsAnyChecked={setIsAnyChecked}
       />
       <button
         className="p-2 mx-auto mt-4 text-white bg-red-500 rounded-lg"
@@ -100,9 +104,9 @@ const AsideWithFilters = ({ variedades }: Readonly<AsideMainClientProps>) => {
   );
 };
 
-const AsideMainReact = ({ variedades }: Readonly<AsideMainClientProps>) => (
+const AsideMainReact = ({ variedades, paises }: Readonly<AsideMainClientProps>) => (
   <GlobalSelectionProvider>
-    <AsideWithFilters variedades={variedades} />
+    <AsideWithFilters variedades={variedades} paises={paises} />
   </GlobalSelectionProvider>
 );
 

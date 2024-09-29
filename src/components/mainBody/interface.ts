@@ -1,25 +1,21 @@
 import type { EmblaOptionsType } from "embla-carousel";
 
 export interface Wines {
-  id:         number;
-  nombre:     string;
-  precio:     number;
-  id_unica:   number;
+  id_vino: string;
+  nombre: string;
+  precio: string;
+  bodega: string;
+  anada: number;
+  notas_cata: string;
   url_imagen: string;
-  bodega:     string;
-  variedades: Variedades;
-  paises:     Paises;
-}
-
-export interface Paises {
-  id:   number;
-  pais: string;
-}
-
-export interface Variedades {
-  id:       number;
-  tipo:     string;
-  variedad: string;
+  descripcion: string;
+  nivel_alcohol: number;
+  variedades: string[];
+  pais_importacion: string;
+  color_vino: "Blanco" | "Tinto";
+  contenido_azucar: "Seco" | "Semiseco";
+  contenido_carbonico: "Tranquilo";
+  tipo_crianza: string;
 }
 
 export interface VinosOrganizados {

@@ -7,13 +7,19 @@ async function fetchData() {
     .from('variedades')
     .select('id, variedad');
 
-  if (errorVariedades ) {
+  const { data: paises, error: errorPaises } = await supabase
+    .from('paises')
+    .select('id, pais');
+
+  if (errorVariedades) {
     throw new Error('Error fetching Variedades ');
+  } else if (errorPaises) {
+    throw new Error('Error fetching Paises ');
   }
   
-  return { variedades };
+  return { variedades, paises };
 }
 
-const { variedades } = await fetchData();
+const { variedades, paises } = await fetchData();
 ---
-<AsideMainReact variedades={variedades} client:load />
+<AsideMainReact variedades={variedades} paises={paises} client:load />

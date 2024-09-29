@@ -36,36 +36,23 @@ function separarElemento(elemento: string) {
   return {
     nombre: nombre.replace(/-/g, ' '),
     variedad: variedad.replace(/-/g, ' ')
+    // variedad: variedad.split(',').map(variedad => variedad.replace(/-/g, ' '))
   };
 }
 
 export default function ModalInfo({ children, elemento }: Readonly<ModalInfoProps>) {
   const [open, setOpen] = useState(false);
   const [vino, setVino] = useState<Wine>();
-  const { nombre, variedad } = separarElemento(elemento);
-
+  const { nombre, variedad } = separarElemento(elemento);;
 
   const fetchData = useCallback(async () => {
     try {
-      let { data: variedades, error: errorVariedades } = await supabase
-        .from('variedades')
-        .select('id')
-        .eq('variedad', variedad);
-
-      if (errorVariedades) {
-        throw errorVariedades;
-      }
-
-      if (!variedades || variedades.length === 0) {
-        throw new Error('No se encontró la variedad especificada.');
-      }
 
       let { data: vinos, error: errorVino } = await supabase
-        .from('vinos')
-        .select("*, variedades(variedad), paises(pais)")
+        .from('wines')
+        .select("*")
         .eq('nombre', nombre)
-        .eq('variedad', variedades[0].id);
-
+        .containedBy('variedades', [variedad]);
       if (errorVino) {
         throw errorVino;
       }
@@ -92,28 +79,35 @@ export default function ModalInfo({ children, elemento }: Readonly<ModalInfoProp
       </DialogTrigger>
       <DialogContent className="max-w-[80%] max-h-[80%] min-h-[60%] flex flex-row">
         <div className="flex-shrink-0 max-w-[40%]">
-          <img src={vino?.url_imagen} alt={vino?.nombre} width={400} height={400} />
+          <img src={vino?.url_imagen} alt={vino?.id_vino} width={400} height={400} />
         </div>
         <div className="w-full flex flex-col justify-between">
           <div className="w-full">
             <div className="grid grid-cols-[80%_1fr]">
               <div className="pt-5">
-                <h1 className="text-3xl font-bold text-gray-900">{vino?.nombre}, {vino?.variedades.variedad}</h1>
-                <p className="mt-2 text-xl text-gray-500">{vino?.bodega}</p>
+                <h1 className="text-3xl font-bold text-gray-900">{vino?.nombre}, {vino?.variedades}</h1>
+                <p className="mt-2 text-xl text-gray-500">Bodegas {vino?.bodega}</p>
               </div>
-              <div className="w-16 m-auto">
-                {getBandera(vino?.paises.pais ?? "")}
+              <div className="w-16 m-auto border border-black">
+                {getBandera(vino?.pais_importacion)}
               </div>
             </div>
-            <div className="flex justify-between row-start-2 max-h-9 mt-2">
-              <div className="space-x-2">
-                <Badge variant="secondary" className="px-5 h-7 my-auto">{vino?.paises.pais}</Badge>
-                <Badge variant="outline" className="px-5 h-7 my-auto">{vino?.tipo}</Badge>
+            <div className="flex justify-between row-start-2 mt-1">
+              <div className="flex flex-col gap-y-2">
+                <div className="space-x-2">
+                  <Badge variant="secondary" className="px-4 h-6">{vino?.pais_importacion}</Badge>
+                  <Badge variant="outline" className="px-4 h-6">{vino?.tipo_crianza}</Badge>
+                  <Badge variant="outline" className="px-4 h-6">{vino?.contenido_azucar}</Badge>
+                </div>
+                <div className="space-x-2">
+                  <Badge variant="outline" className="px-4 h-6">{vino?.color_vino}</Badge>
+                  <Badge variant="outline" className="px-4 h-6">{vino?.contenido_carbonico}</Badge>
+                </div>
               </div>
-              <div className="flex items-center gap-x-3 h-7 my-auto">
+              <div className="flex items-center gap-x-3 h-7 mb-auto">
                 <div className="flex items-center">
                   <Grape className="w-6 h-6 text-purple-600" />
-                  <span className="text-sm text-gray-600">{vino?.variedades.variedad}</span>
+                  <span className="text-sm text-gray-600">{vino?.variedades.join(' | ')}</span>
                 </div>
                 <div className="flex items-center">
                   <GlassWater className="w-6 h-6 text-blue-600" />
@@ -121,15 +115,16 @@ export default function ModalInfo({ children, elemento }: Readonly<ModalInfoProp
                 </div>
               </div>
             </div>
-            <p className="text-gray-600 row-start-3 border-b mt-3">{vino?.descripcion}</p>
-            <p className="text-gray-600 row-start-3 border-b mt-3">{vino?.notas_cata}</p>
+            <div className="mt-1">
+              <p className="text-gray-600 row-start-3 border-b mt-3">{vino?.descripcion}</p>
+              <p className="text-gray-600 row-start-3 border-b mt-3">{vino?.notas_cata}</p>
+            </div>
           </div>
           <div className="w-full flex items-center justify-end pb-5">
             <div className="flex items-baseline">
               <span className="text-4xl font-bold text-gray-900">${vino?.precio} COP</span>
               <span className="ml-2 text-xl text-gray-500">/ botella</span>
             </div>
-            {/* <Button size="lg" className="px-8">Añadir al carrito</Button> */}
           </div>
         </div>
       </DialogContent>
