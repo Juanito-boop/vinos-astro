@@ -11,21 +11,6 @@ import {
 	PrevButton,
 	usePrevNextButtons
 } from './EmblaCarouselArrowButtons';
-import Bandera from '@/components/modales/infoProducto/Banderas';
-
-const banderas: { [key: string]: () => JSX.Element | null } = {
-	Argentina: () => <Bandera pais="Argentina" />,
-	Chile: () => <Bandera pais="Chile" />,
-	Colombia: () => <Bandera pais="Colombia" />,
-	España: () => <Bandera pais="España" />,
-	Francia: () => <Bandera pais="Francia" />,
-	Italia: () => <Bandera pais="Italia" />,
-};
-
-const getBandera = (banderaName: string | undefined) => {
-	const bandera = banderas[banderaName ?? ''];
-	return bandera ? bandera() : null;
-};
 
 const EmblaCarousel: React.FC<EmblaCarouselProps> = ({ titulo, options, vinos }) => {
 	const [emblaRef, emblaApi] = useEmblaCarousel(options as any);
@@ -62,7 +47,9 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({ titulo, options, vinos })
 													<Badge variant="default">{vino.color_vino}</Badge>
 												</div>
 												<div className='mx-auto max-w-12 border border-black'>
-													{getBandera(vino.pais_importacion ?? "")}
+													<picture>
+														<img src={`https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/paises/${vino.pais_importacion.replace(/ñ/g, 'n')}.svg?t=2024-09-29T21%3A16%3A34.164Z`} alt={`Bandera de ${vino.pais_importacion}`} />
+													</picture>
 												</div>
 											</div>
 										</picture>

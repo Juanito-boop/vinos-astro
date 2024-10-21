@@ -95,7 +95,7 @@ const AsideWithFilters = ({ variedades, paises }: Readonly<AsideMainClientProps>
         setIsAnyChecked={setIsAnyChecked}
       />
       <button
-        className="p-2 mx-auto mt-4 text-white bg-red-500 rounded-lg"
+        className="p-2 mx-auto my-4 text-white bg-red-500 rounded-lg"
         onClick={handleClearFilters}
       >
         Limpiar Filtro

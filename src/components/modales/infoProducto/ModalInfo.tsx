@@ -89,7 +89,13 @@ export default function ModalInfo({ children, elemento }: Readonly<ModalInfoProp
                 <p className="mt-2 text-xl text-gray-500">Bodegas {vino?.bodega}</p>
               </div>
               <div className="w-16 m-auto border border-black">
-                {getBandera(vino?.pais_importacion)}
+                <picture>
+                  <img 
+                  src={`https://npuxpuelimayqrsmzqur.supabase.co/storage/v1/object/public/paises/${
+                    vino?.pais_importacion.replace(/ñ/g, 'n')
+                  }.svg?t=2024-09-29T21%3A16%3A34.164Z`} 
+                  alt={`Bandera de ${vino?.pais_importacion}`} />
+                </picture>
               </div>
             </div>
             <div className="flex justify-between row-start-2 mt-1">
